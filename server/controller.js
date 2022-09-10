@@ -1,5 +1,5 @@
-
-globalID = 0;
+let affirmations = require('./db.json')
+globalID = 1;
 
 module.exports = {
 
@@ -32,5 +32,10 @@ module.exports = {
         positive.push(newPositive)
         globalID++;
         res.status(200).send(positive)
-    }
+    },
+    getPositive: (req, res) => {
+        let randomIndex = Math.floor(Math.random() * affirmations.length);
+        let randomAffirmation = affirmations[randomIndex];
+        res.status(200).send(randomAffirmation)
+       }
 }
