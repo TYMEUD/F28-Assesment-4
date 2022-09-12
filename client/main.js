@@ -1,12 +1,12 @@
 const complimentBtn = document.getElementById("complimentButton")
 const fortuneBtn = document.getElementById("fortuneBtn")
-const form = document.querySelector('form')
+const insultBtn = document.getElementById("insultButton")
 const addPositiveBtn = document.getElementById('add-positive-btn')
 const getPositiveBtn = document.getElementById('get-positive-btn')
 
 baseURL = "http://localhost:4000/api"
 
-const positiveCallback = ({ data: positive }) => displayPositive(positive)
+const positiveCallback = ({ data: randomAffirmation }) => displayPositive(randomAffirmation)
 const errCallback = err => console.log(err)
 
 
@@ -37,8 +37,8 @@ function createPositiveCard(positive) {
     const positiveCard = document.createElement('div')
     positiveCard.classList.add('positive-card')
 
-    positiveCard.innerHTML = `<img alt='positive cover image' src=${positive.imageURL} class="positive-cover-image"/>
-    <p class="quote">${positive.quote}</p>
+    positiveCard.innerHTML = `<img alt='positive cover image' src=${randomAffirmation.imageURL} class="positive-cover-image"/>
+    <p class="quote">${randomAffirmation.quote}</p>
     `
 
 
@@ -61,6 +61,13 @@ const getCompliment = () => {
     });
 };
 
+const getInsults = () => {
+    axios.get("http://localhost:4000/api/insults/")
+        .then(res => {
+            const data = res.data;
+            alert(data);
+    });
+};
 const getFortune =() => {
     axios.get("http://localhost:4000/api/fortune/")
     .then(res => {
@@ -78,9 +85,12 @@ const getPositive = () => {
 }
 
 
+
 complimentBtn.addEventListener('click', getCompliment)
 
 fortuneBtn.addEventListener('click', getFortune)
 
-form.addEventListener('submit',createPositive)
+insultBtn.addEventListener('click', getInsults)
+
+addPositiveBtn.addEventListener('click',createPositive)
 

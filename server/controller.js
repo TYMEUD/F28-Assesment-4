@@ -22,6 +22,17 @@ module.exports = {
       
         res.status(200).send(randomFortune);
     },
+
+    getInsults: (req, res) => {
+     const insults = ["Gee, you're awful at html", "idk how you're gonna pass this assessment", "Ya mommma"];
+   
+     // choose random insult
+     let randomIndex = Math.floor(Math.random() * insults.length);
+     let randomInsult = insults[randomIndex];
+   
+     res.status(200).send(randomInsult);
+    },
+
     createUplift: (req, res) => {
         const {quote,imageURL} = req.body;
         let newPositive = {
@@ -33,9 +44,10 @@ module.exports = {
         globalID++;
         res.status(200).send(positive)
     },
+
     getPositive: (req, res) => {
         let randomIndex = Math.floor(Math.random() * affirmations.length);
         let randomAffirmation = affirmations[randomIndex];
         res.status(200).send(randomAffirmation)
-       }
+    }
 }
